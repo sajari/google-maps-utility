@@ -1,0 +1,13 @@
+{
+    "name": "jojari/google-maps-utility",
+    "description": "",
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "GoogleMapsUtility": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

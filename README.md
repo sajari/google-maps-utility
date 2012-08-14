@@ -1,4 +1,5 @@
-google-maps-utility
+Google Maps Utility
 ===================
 
-A small utility file to work with Google Maps
+**Note:** we are not the origial authors of this utility. We have created it
+so that we can manage this utility with Packagist and Composer.
