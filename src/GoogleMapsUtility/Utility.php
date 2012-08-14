@@ -9,21 +9,6 @@ class Utility
 {
     const TILE_SIZE = 256;
 
-    public static function fromXYToLatLng($point, $zoom)
-    {
-        $scale = (1 << ($zoom)) * static::TILE_SIZE;
-
-        return new Point(
-            (int) ($normalised->x * $scale),
-            (int) ($normalised->y * $scale)
-        );
-
-        return new Point(
-            $pixelCoords->x % static::TILE_SIZE,
-            $pixelCoords->y % static::TILE_SIZE
-        );
-    }
-
     public static function fromMercatorCoords($point)
     {
         $point->x *= 360;
