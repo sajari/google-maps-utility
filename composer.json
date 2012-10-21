@@ -1,6 +1,15 @@
 {
     "name": "jojari/google-maps-utility",
-    "description": "",
+    "description": "A small utility file to work with Google Maps",
+    "license": "UNKNOWN",
+    "authors": [
+        {
+            "name": "Unknown"
+        },
+        {
+            "name": "Jonathan Ingram"
+        }
+    ],
     "require": {
         "php": ">=5.3.3"
     },
