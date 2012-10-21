@@ -7,9 +7,19 @@ namespace GoogleMapsUtility;
  */
 class Utility
 {
+    /**
+     * @var integer
+     */
     const TILE_SIZE = 256;
 
-    public static function fromMercatorCoords($point)
+    /**
+     *
+     *
+     * @param Point $point
+     *
+     * @return Point
+     */
+    public static function fromMercatorCoords(Point $point)
     {
         $point->x *= 360;
         $point->y = rad2deg(atan(sinh($point->y)) * M_PI);
@@ -17,6 +27,15 @@ class Utility
         return $point;
     }
 
+    /**
+     *
+     *
+     * @param float   $lat
+     * @param float   $lng
+     * @param integer $zoom
+     *
+     * @return Point
+     */
     public static function getPixelOffsetInTile($lat, $lng, $zoom)
     {
         $pixelCoords = static::toZoomedPixelCoords($lat, $lng, $zoom);
@@ -27,6 +46,15 @@ class Utility
         );
     }
 
+    /**
+     *
+     *
+     * @param float   $x
+     * @param float   $y
+     * @param integer $zoom
+     *
+     * @return Boundary
+     */
     public static function getTileRect($x, $y, $zoom)
     {
         $tilesAtThisZoom = 1 << $zoom;
@@ -45,6 +73,14 @@ class Utility
         return new Boundary($lng, $bottomLat, $lngWidth, $latHeight);
     }
 
+    /**
+     *
+     *
+     * @param float $lat
+     * @param float $lng
+     *
+     * @return Point
+     */
     public static function toMercatorCoords($lat, $lng)
     {
         if ($lng > 180) {
@@ -57,7 +93,14 @@ class Utility
         return new Point($lng, $lat);
     }
 
-    public static function toNormalisedMercatorCoords($point)
+    /**
+     *
+     *
+     * @param Point $point
+     *
+     * @return Point
+     */
+    public static function toNormalisedMercatorCoords(Point $point)
     {
         $point->x += 0.5;
         $point->y = abs($point->y - 0.5);
@@ -65,6 +108,15 @@ class Utility
         return $point;
     }
 
+    /**
+     *
+     *
+     * @param float   $lat
+     * @param float   $lng
+     * @param integer $zoom
+     *
+     * @return Point
+     */
     public static function toTileXY($lat, $lng, $zoom)
     {
         $normalised = static::toNormalisedMercatorCoords(
@@ -76,6 +128,15 @@ class Utility
         return new Point((int) ($normalised->x * $scale), (int) ($normalised->y * $scale));
     }
 
+    /**
+     *
+     *
+     * @param float   $lat
+     * @param float   $lng
+     * @param integer $zoom
+     *
+     * @return Point
+     */
     public static function toZoomedPixelCoords($lat, $lng, $zoom)
     {
         $normalised = static::toNormalisedMercatorCoords(
@@ -90,7 +151,15 @@ class Utility
         );
     }
 
-    public static function fromZoomedPixelCoords($point, $zoom)
+    /**
+     *
+     *
+     * @param Point   $point
+     * @param integer $zoom
+     *
+     * @return \stdClass
+     */
+    public static function fromZoomedPixelCoords(Point $point, $zoom)
     {
         $lng = ($point->x * (360 / ((1 << $zoom) * 256))) - 180;
         $lat = $point->y * (2 / ((1 << $zoom) * 256));
@@ -98,7 +167,7 @@ class Utility
         $lat = $lat * M_PI;
         $lat = rad2deg(atan(sinh($lat)));
 
-        $latlng = new StdClass();
+        $latlng = new \stdClass();
         $latlng->lat = $lat;
         $latlng->lng = $lng;
 
